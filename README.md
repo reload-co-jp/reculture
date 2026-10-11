@@ -49,7 +49,6 @@ pnpm build                     # データ検証 → out/ に静的出力
 | `YOUTUBE_API_KEY`   | Secret           | YouTube Data API v3（収集に必須）                               |
 | `ANTHROPIC_API_KEY` | Secret           | AI 要約・分類（未設定なら AI 処理をスキップ）                   |
 | `LLM_MODEL`         | Variable（任意） | 使用モデル。既定 `claude-opus-5-5`                              |
-| `SITE_URL`          | Variable         | 公開 URL（例 `https://example.com`）。canonical・sitemap に使用 |
 
 ローカルでは `YOUTUBE_API_KEY=... ANTHROPIC_API_KEY=... pnpm collect -- --dry-run` で書き込みなしの試行ができる。
 

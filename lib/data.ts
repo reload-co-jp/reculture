@@ -10,9 +10,7 @@ import sampleCollectionsJson from "@/data/sample/collections.json"
 const useSample = process.env.RECULTURE_SAMPLE === "1"
 
 export const SITE_NAME = "Reculture"
-export const SITE_URL = (
-  process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"
-).replace(/\/$/, "")
+export const SITE_URL = "https://reculture.reload.co.jp"
 
 export const genres = genresJson as Genre[]
 export const genreName: Record<string, string> = Object.fromEntries(
