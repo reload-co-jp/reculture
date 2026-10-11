@@ -1,0 +1,21 @@
+[
+  {
+    "id": "sample-route",
+    "title": "【サンプル】はじめての教養ルート",
+    "description": "表示確認用のサンプル特集です。",
+    "steps": [
+      {
+        "videoId": "sample-01",
+        "note": "まずは概要をつかむ"
+      },
+      {
+        "videoId": "sample-04",
+        "note": "歴史の流れを知る"
+      },
+      {
+        "videoId": "sample-08",
+        "note": "科学的な見方を深める"
+      }
+    ]
+  }
+]

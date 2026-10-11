@@ -1,0 +1,31 @@
+{
+  "language": "ja",
+  "regionCode": "JP",
+  "keywords": [
+    { "q": "哲学 入門 解説", "genreId": "philosophy" },
+    { "q": "世界史 解説 講義", "genreId": "history" },
+    { "q": "物理学 わかりやすく 解説", "genreId": "science" },
+    { "q": "経済学 入門 講義", "genreId": "economics" },
+    { "q": "美術史 解説", "genreId": "arts" },
+    { "q": "言語学 入門", "genreId": "literature" },
+    { "q": "人工知能 仕組み 解説", "genreId": "technology" },
+    { "q": "心理学 入門 講義", "genreId": "psychology" }
+  ],
+  "channels": [],
+  "targetGenreIds": [
+    "philosophy",
+    "history",
+    "science",
+    "economics",
+    "arts",
+    "literature",
+    "technology",
+    "psychology"
+  ],
+  "minDurationSec": 180,
+  "maxDurationSec": 5400,
+  "publishedWithinDays": 730,
+  "excludeKeywords": ["#shorts", "切り抜き", "ライブ配信", "生配信", "#PR"],
+  "excludeChannelIds": [],
+  "maxPerRun": 20
+}

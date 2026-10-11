@@ -1,0 +1,914 @@
+[
+  {
+    "id": "sample-01",
+    "youtubeId": "SAMPLE00001",
+    "title": "【サンプル】哲学・思想の動画タイトル例 その1：表示確認用のダミーデータです",
+    "channelId": "sample",
+    "channelTitle": "サンプルチャンネル",
+    "url": "https://example.com/",
+    "thumbnailUrl": "",
+    "publishedAt": "2026-01-01T00:00:00.000Z",
+    "durationSec": 960,
+    "embeddable": false,
+    "summary": "これはデザイン確認用のサンプル要約です。実在の動画ではありません。問いを立て、考える技術。古代から現代までの思想とその背景をたどる。",
+    "learningPoints": [
+      "サンプルの学習ポイント1",
+      "サンプルの学習ポイント2",
+      "サンプルの学習ポイント3"
+    ],
+    "audience": [
+      "学生"
+    ],
+    "prerequisites": "特になし",
+    "genreId": "philosophy",
+    "subGenreId": "ethics",
+    "tags": [
+      "サンプル",
+      "哲学・思想"
+    ],
+    "difficulty": "beginner",
+    "depth": "standard",
+    "editorNote": "サンプルの編集者コメントです。",
+    "featured": true,
+    "collectedAt": "2026-10-01T00:00:00.000Z",
+    "lastCheckedAt": "2026-10-01T00:00:00.000Z",
+    "source": "sample",
+    "aiStatus": "done",
+    "reviewStatus": "reviewed",
+    "status": "approved"
+  },
+  {
+    "id": "sample-02",
+    "youtubeId": "SAMPLE00002",
+    "title": "【サンプル】哲学・思想の動画タイトル例 その2：表示確認用のダミーデータです",
+    "channelId": "sample",
+    "channelTitle": "サンプルチャンネル",
+    "url": "https://example.com/",
+    "thumbnailUrl": "",
+    "publishedAt": "2026-01-02T00:00:00.000Z",
+    "durationSec": 1800,
+    "embeddable": false,
+    "summary": "これはデザイン確認用のサンプル要約です。実在の動画ではありません。問いを立て、考える技術。古代から現代までの思想とその背景をたどる。",
+    "learningPoints": [
+      "サンプルの学習ポイント1",
+      "サンプルの学習ポイント2",
+      "サンプルの学習ポイント3"
+    ],
+    "audience": [
+      "社会人"
+    ],
+    "prerequisites": "サンプルの前提知識",
+    "genreId": "philosophy",
+    "subGenreId": "history-of-philosophy",
+    "tags": [
+      "サンプル",
+      "哲学・思想"
+    ],
+    "difficulty": "intermediate",
+    "depth": "deep",
+    "editorNote": "",
+    "featured": false,
+    "collectedAt": "2026-10-01T00:00:00.000Z",
+    "lastCheckedAt": "2026-10-01T00:00:00.000Z",
+    "source": "sample",
+    "aiStatus": "done",
+    "reviewStatus": "reviewed",
+    "status": "approved"
+  },
+  {
+    "id": "sample-03",
+    "youtubeId": "SAMPLE00003",
+    "title": "【サンプル】哲学・思想の動画タイトル例 その3：表示確認用のダミーデータです",
+    "channelId": "sample",
+    "channelTitle": "サンプルチャンネル",
+    "url": "https://example.com/",
+    "thumbnailUrl": "",
+    "publishedAt": "2026-01-03T00:00:00.000Z",
+    "durationSec": 2700,
+    "embeddable": false,
+    "summary": "これはデザイン確認用のサンプル要約です。実在の動画ではありません。問いを立て、考える技術。古代から現代までの思想とその背景をたどる。",
+    "learningPoints": [
+      "サンプルの学習ポイント1",
+      "サンプルの学習ポイント2",
+      "サンプルの学習ポイント3"
+    ],
+    "audience": [
+      "専門的に学びたい人"
+    ],
+    "prerequisites": "サンプルの前提知識",
+    "genreId": "philosophy",
+    "subGenreId": "ethics",
+    "tags": [
+      "サンプル",
+      "哲学・思想"
+    ],
+    "difficulty": "advanced",
+    "depth": "overview",
+    "editorNote": "",
+    "featured": false,
+    "collectedAt": "2026-10-01T00:00:00.000Z",
+    "lastCheckedAt": "2026-10-01T00:00:00.000Z",
+    "source": "sample",
+    "aiStatus": "done",
+    "reviewStatus": "reviewed",
+    "status": "approved"
+  },
+  {
+    "id": "sample-04",
+    "youtubeId": "SAMPLE00004",
+    "title": "【サンプル】歴史の動画タイトル例 その1：表示確認用のダミーデータです",
+    "channelId": "sample",
+    "channelTitle": "サンプルチャンネル",
+    "url": "https://example.com/",
+    "thumbnailUrl": "",
+    "publishedAt": "2026-01-04T00:00:00.000Z",
+    "durationSec": 600,
+    "embeddable": false,
+    "summary": "これはデザイン確認用のサンプル要約です。実在の動画ではありません。過去の出来事から、いまの社会のなりたちを読み解く。",
+    "learningPoints": [
+      "サンプルの学習ポイント1",
+      "サンプルの学習ポイント2",
+      "サンプルの学習ポイント3"
+    ],
+    "audience": [
+      "はじめて学ぶ人"
+    ],
+    "prerequisites": "特になし",
+    "genreId": "history",
+    "subGenreId": "japanese-history",
+    "tags": [
+      "サンプル",
+      "歴史"
+    ],
+    "difficulty": "beginner",
+    "depth": "standard",
+    "editorNote": "サンプルの編集者コメントです。",
+    "featured": true,
+    "collectedAt": "2026-10-01T00:00:00.000Z",
+    "lastCheckedAt": "2026-10-01T00:00:00.000Z",
+    "source": "sample",
+    "aiStatus": "done",
+    "reviewStatus": "reviewed",
+    "status": "approved"
+  },
+  {
+    "id": "sample-05",
+    "youtubeId": "SAMPLE00005",
+    "title": "【サンプル】歴史の動画タイトル例 その2：表示確認用のダミーデータです",
+    "channelId": "sample",
+    "channelTitle": "サンプルチャンネル",
+    "url": "https://example.com/",
+    "thumbnailUrl": "",
+    "publishedAt": "2026-01-05T00:00:00.000Z",
+    "durationSec": 3300,
+    "embeddable": false,
+    "summary": "これはデザイン確認用のサンプル要約です。実在の動画ではありません。過去の出来事から、いまの社会のなりたちを読み解く。",
+    "learningPoints": [
+      "サンプルの学習ポイント1",
+      "サンプルの学習ポイント2",
+      "サンプルの学習ポイント3"
+    ],
+    "audience": [
+      "学生"
+    ],
+    "prerequisites": "サンプルの前提知識",
+    "genreId": "history",
+    "subGenreId": "world-history",
+    "tags": [
+      "サンプル",
+      "歴史"
+    ],
+    "difficulty": "intermediate",
+    "depth": "deep",
+    "editorNote": "",
+    "featured": false,
+    "collectedAt": "2026-10-01T00:00:00.000Z",
+    "lastCheckedAt": "2026-10-01T00:00:00.000Z",
+    "source": "sample",
+    "aiStatus": "done",
+    "reviewStatus": "reviewed",
+    "status": "approved"
+  },
+  {
+    "id": "sample-06",
+    "youtubeId": "SAMPLE00006",
+    "title": "【サンプル】歴史の動画タイトル例 その3：表示確認用のダミーデータです",
+    "channelId": "sample",
+    "channelTitle": "サンプルチャンネル",
+    "url": "https://example.com/",
+    "thumbnailUrl": "",
+    "publishedAt": "2026-01-06T00:00:00.000Z",
+    "durationSec": 420,
+    "embeddable": false,
+    "summary": "これはデザイン確認用のサンプル要約です。実在の動画ではありません。過去の出来事から、いまの社会のなりたちを読み解く。",
+    "learningPoints": [
+      "サンプルの学習ポイント1",
+      "サンプルの学習ポイント2",
+      "サンプルの学習ポイント3"
+    ],
+    "audience": [
+      "社会人"
+    ],
+    "prerequisites": "サンプルの前提知識",
+    "genreId": "history",
+    "subGenreId": "japanese-history",
+    "tags": [
+      "サンプル",
+      "歴史"
+    ],
+    "difficulty": "advanced",
+    "depth": "overview",
+    "editorNote": "",
+    "featured": false,
+    "collectedAt": "2026-10-01T00:00:00.000Z",
+    "lastCheckedAt": "2026-10-01T00:00:00.000Z",
+    "source": "sample",
+    "aiStatus": "done",
+    "reviewStatus": "reviewed",
+    "status": "approved"
+  },
+  {
+    "id": "sample-07",
+    "youtubeId": "SAMPLE00007",
+    "title": "【サンプル】自然科学の動画タイトル例 その1：表示確認用のダミーデータです",
+    "channelId": "sample",
+    "channelTitle": "サンプルチャンネル",
+    "url": "https://example.com/",
+    "thumbnailUrl": "",
+    "publishedAt": "2026-01-07T00:00:00.000Z",
+    "durationSec": 960,
+    "embeddable": false,
+    "summary": "これはデザイン確認用のサンプル要約です。実在の動画ではありません。物理・生物・宇宙など、世界のしくみを科学の目で見る。",
+    "learningPoints": [
+      "サンプルの学習ポイント1",
+      "サンプルの学習ポイント2",
+      "サンプルの学習ポイント3"
+    ],
+    "audience": [
+      "専門的に学びたい人"
+    ],
+    "prerequisites": "特になし",
+    "genreId": "science",
+    "subGenreId": "physics",
+    "tags": [
+      "サンプル",
+      "自然科学"
+    ],
+    "difficulty": "beginner",
+    "depth": "standard",
+    "editorNote": "サンプルの編集者コメントです。",
+    "featured": true,
+    "collectedAt": "2026-10-01T00:00:00.000Z",
+    "lastCheckedAt": "2026-10-01T00:00:00.000Z",
+    "source": "sample",
+    "aiStatus": "done",
+    "reviewStatus": "reviewed",
+    "status": "approved"
+  },
+  {
+    "id": "sample-08",
+    "youtubeId": "SAMPLE00008",
+    "title": "【サンプル】自然科学の動画タイトル例 その2：表示確認用のダミーデータです",
+    "channelId": "sample",
+    "channelTitle": "サンプルチャンネル",
+    "url": "https://example.com/",
+    "thumbnailUrl": "",
+    "publishedAt": "2026-01-08T00:00:00.000Z",
+    "durationSec": 1800,
+    "embeddable": false,
+    "summary": "これはデザイン確認用のサンプル要約です。実在の動画ではありません。物理・生物・宇宙など、世界のしくみを科学の目で見る。",
+    "learningPoints": [
+      "サンプルの学習ポイント1",
+      "サンプルの学習ポイント2",
+      "サンプルの学習ポイント3"
+    ],
+    "audience": [
+      "はじめて学ぶ人"
+    ],
+    "prerequisites": "サンプルの前提知識",
+    "genreId": "science",
+    "subGenreId": "biology",
+    "tags": [
+      "サンプル",
+      "自然科学"
+    ],
+    "difficulty": "intermediate",
+    "depth": "deep",
+    "editorNote": "",
+    "featured": false,
+    "collectedAt": "2026-10-01T00:00:00.000Z",
+    "lastCheckedAt": "2026-10-01T00:00:00.000Z",
+    "source": "sample",
+    "aiStatus": "done",
+    "reviewStatus": "reviewed",
+    "status": "approved"
+  },
+  {
+    "id": "sample-09",
+    "youtubeId": "SAMPLE00009",
+    "title": "【サンプル】自然科学の動画タイトル例 その3：表示確認用のダミーデータです",
+    "channelId": "sample",
+    "channelTitle": "サンプルチャンネル",
+    "url": "https://example.com/",
+    "thumbnailUrl": "",
+    "publishedAt": "2026-01-09T00:00:00.000Z",
+    "durationSec": 2700,
+    "embeddable": false,
+    "summary": "これはデザイン確認用のサンプル要約です。実在の動画ではありません。物理・生物・宇宙など、世界のしくみを科学の目で見る。",
+    "learningPoints": [
+      "サンプルの学習ポイント1",
+      "サンプルの学習ポイント2",
+      "サンプルの学習ポイント3"
+    ],
+    "audience": [
+      "学生"
+    ],
+    "prerequisites": "サンプルの前提知識",
+    "genreId": "science",
+    "subGenreId": "astronomy",
+    "tags": [
+      "サンプル",
+      "自然科学"
+    ],
+    "difficulty": "advanced",
+    "depth": "overview",
+    "editorNote": "",
+    "featured": false,
+    "collectedAt": "2026-10-01T00:00:00.000Z",
+    "lastCheckedAt": "2026-10-01T00:00:00.000Z",
+    "source": "sample",
+    "aiStatus": "done",
+    "reviewStatus": "reviewed",
+    "status": "approved"
+  },
+  {
+    "id": "sample-10",
+    "youtubeId": "SAMPLE00010",
+    "title": "【サンプル】経済・社会の動画タイトル例 その1：表示確認用のダミーデータです",
+    "channelId": "sample",
+    "channelTitle": "サンプルチャンネル",
+    "url": "https://example.com/",
+    "thumbnailUrl": "",
+    "publishedAt": "2026-01-10T00:00:00.000Z",
+    "durationSec": 600,
+    "embeddable": false,
+    "summary": "これはデザイン確認用のサンプル要約です。実在の動画ではありません。お金、市場、制度。社会を動かす仕組みを理解する。",
+    "learningPoints": [
+      "サンプルの学習ポイント1",
+      "サンプルの学習ポイント2",
+      "サンプルの学習ポイント3"
+    ],
+    "audience": [
+      "社会人"
+    ],
+    "prerequisites": "特になし",
+    "genreId": "economics",
+    "subGenreId": "economics-basics",
+    "tags": [
+      "サンプル",
+      "経済・社会"
+    ],
+    "difficulty": "beginner",
+    "depth": "standard",
+    "editorNote": "サンプルの編集者コメントです。",
+    "featured": true,
+    "collectedAt": "2026-10-01T00:00:00.000Z",
+    "lastCheckedAt": "2026-10-01T00:00:00.000Z",
+    "source": "sample",
+    "aiStatus": "done",
+    "reviewStatus": "reviewed",
+    "status": "approved"
+  },
+  {
+    "id": "sample-11",
+    "youtubeId": "SAMPLE00011",
+    "title": "【サンプル】経済・社会の動画タイトル例 その2：表示確認用のダミーデータです",
+    "channelId": "sample",
+    "channelTitle": "サンプルチャンネル",
+    "url": "https://example.com/",
+    "thumbnailUrl": "",
+    "publishedAt": "2026-01-11T00:00:00.000Z",
+    "durationSec": 3300,
+    "embeddable": false,
+    "summary": "これはデザイン確認用のサンプル要約です。実在の動画ではありません。お金、市場、制度。社会を動かす仕組みを理解する。",
+    "learningPoints": [
+      "サンプルの学習ポイント1",
+      "サンプルの学習ポイント2",
+      "サンプルの学習ポイント3"
+    ],
+    "audience": [
+      "専門的に学びたい人"
+    ],
+    "prerequisites": "サンプルの前提知識",
+    "genreId": "economics",
+    "subGenreId": "sociology",
+    "tags": [
+      "サンプル",
+      "経済・社会"
+    ],
+    "difficulty": "intermediate",
+    "depth": "deep",
+    "editorNote": "",
+    "featured": false,
+    "collectedAt": "2026-10-01T00:00:00.000Z",
+    "lastCheckedAt": "2026-10-01T00:00:00.000Z",
+    "source": "sample",
+    "aiStatus": "done",
+    "reviewStatus": "reviewed",
+    "status": "approved"
+  },
+  {
+    "id": "sample-12",
+    "youtubeId": "SAMPLE00012",
+    "title": "【サンプル】経済・社会の動画タイトル例 その3：表示確認用のダミーデータです",
+    "channelId": "sample",
+    "channelTitle": "サンプルチャンネル",
+    "url": "https://example.com/",
+    "thumbnailUrl": "",
+    "publishedAt": "2026-01-12T00:00:00.000Z",
+    "durationSec": 420,
+    "embeddable": false,
+    "summary": "これはデザイン確認用のサンプル要約です。実在の動画ではありません。お金、市場、制度。社会を動かす仕組みを理解する。",
+    "learningPoints": [
+      "サンプルの学習ポイント1",
+      "サンプルの学習ポイント2",
+      "サンプルの学習ポイント3"
+    ],
+    "audience": [
+      "はじめて学ぶ人"
+    ],
+    "prerequisites": "サンプルの前提知識",
+    "genreId": "economics",
+    "subGenreId": "economics-basics",
+    "tags": [
+      "サンプル",
+      "経済・社会"
+    ],
+    "difficulty": "advanced",
+    "depth": "overview",
+    "editorNote": "",
+    "featured": false,
+    "collectedAt": "2026-10-01T00:00:00.000Z",
+    "lastCheckedAt": "2026-10-01T00:00:00.000Z",
+    "source": "sample",
+    "aiStatus": "done",
+    "reviewStatus": "reviewed",
+    "status": "approved"
+  },
+  {
+    "id": "sample-13",
+    "youtubeId": "SAMPLE00013",
+    "title": "【サンプル】芸術・文化の動画タイトル例 その1：表示確認用のダミーデータです",
+    "channelId": "sample",
+    "channelTitle": "サンプルチャンネル",
+    "url": "https://example.com/",
+    "thumbnailUrl": "",
+    "publishedAt": "2026-01-13T00:00:00.000Z",
+    "durationSec": 960,
+    "embeddable": false,
+    "summary": "これはデザイン確認用のサンプル要約です。実在の動画ではありません。美術、音楽、建築、映画。表現の歴史と見方を知る。",
+    "learningPoints": [
+      "サンプルの学習ポイント1",
+      "サンプルの学習ポイント2",
+      "サンプルの学習ポイント3"
+    ],
+    "audience": [
+      "学生"
+    ],
+    "prerequisites": "特になし",
+    "genreId": "arts",
+    "subGenreId": "art-history",
+    "tags": [
+      "サンプル",
+      "芸術・文化"
+    ],
+    "difficulty": "beginner",
+    "depth": "standard",
+    "editorNote": "サンプルの編集者コメントです。",
+    "featured": true,
+    "collectedAt": "2026-10-01T00:00:00.000Z",
+    "lastCheckedAt": "2026-10-01T00:00:00.000Z",
+    "source": "sample",
+    "aiStatus": "done",
+    "reviewStatus": "reviewed",
+    "status": "approved"
+  },
+  {
+    "id": "sample-14",
+    "youtubeId": "SAMPLE00014",
+    "title": "【サンプル】芸術・文化の動画タイトル例 その2：表示確認用のダミーデータです",
+    "channelId": "sample",
+    "channelTitle": "サンプルチャンネル",
+    "url": "https://example.com/",
+    "thumbnailUrl": "",
+    "publishedAt": "2026-01-14T00:00:00.000Z",
+    "durationSec": 1800,
+    "embeddable": false,
+    "summary": "これはデザイン確認用のサンプル要約です。実在の動画ではありません。美術、音楽、建築、映画。表現の歴史と見方を知る。",
+    "learningPoints": [
+      "サンプルの学習ポイント1",
+      "サンプルの学習ポイント2",
+      "サンプルの学習ポイント3"
+    ],
+    "audience": [
+      "社会人"
+    ],
+    "prerequisites": "サンプルの前提知識",
+    "genreId": "arts",
+    "subGenreId": "music",
+    "tags": [
+      "サンプル",
+      "芸術・文化"
+    ],
+    "difficulty": "intermediate",
+    "depth": "deep",
+    "editorNote": "",
+    "featured": false,
+    "collectedAt": "2026-10-01T00:00:00.000Z",
+    "lastCheckedAt": "2026-10-01T00:00:00.000Z",
+    "source": "sample",
+    "aiStatus": "done",
+    "reviewStatus": "reviewed",
+    "status": "approved"
+  },
+  {
+    "id": "sample-15",
+    "youtubeId": "SAMPLE00015",
+    "title": "【サンプル】芸術・文化の動画タイトル例 その3：表示確認用のダミーデータです",
+    "channelId": "sample",
+    "channelTitle": "サンプルチャンネル",
+    "url": "https://example.com/",
+    "thumbnailUrl": "",
+    "publishedAt": "2026-01-15T00:00:00.000Z",
+    "durationSec": 2700,
+    "embeddable": false,
+    "summary": "これはデザイン確認用のサンプル要約です。実在の動画ではありません。美術、音楽、建築、映画。表現の歴史と見方を知る。",
+    "learningPoints": [
+      "サンプルの学習ポイント1",
+      "サンプルの学習ポイント2",
+      "サンプルの学習ポイント3"
+    ],
+    "audience": [
+      "専門的に学びたい人"
+    ],
+    "prerequisites": "サンプルの前提知識",
+    "genreId": "arts",
+    "subGenreId": "architecture",
+    "tags": [
+      "サンプル",
+      "芸術・文化"
+    ],
+    "difficulty": "advanced",
+    "depth": "overview",
+    "editorNote": "",
+    "featured": false,
+    "collectedAt": "2026-10-01T00:00:00.000Z",
+    "lastCheckedAt": "2026-10-01T00:00:00.000Z",
+    "source": "sample",
+    "aiStatus": "done",
+    "reviewStatus": "reviewed",
+    "status": "approved"
+  },
+  {
+    "id": "sample-16",
+    "youtubeId": "SAMPLE00016",
+    "title": "【サンプル】文学・言語の動画タイトル例 その1：表示確認用のダミーデータです",
+    "channelId": "sample",
+    "channelTitle": "サンプルチャンネル",
+    "url": "https://example.com/",
+    "thumbnailUrl": "",
+    "publishedAt": "2026-01-16T00:00:00.000Z",
+    "durationSec": 600,
+    "embeddable": false,
+    "summary": "これはデザイン確認用のサンプル要約です。実在の動画ではありません。物語と言葉の世界。作品の読み方から言語学まで。",
+    "learningPoints": [
+      "サンプルの学習ポイント1",
+      "サンプルの学習ポイント2",
+      "サンプルの学習ポイント3"
+    ],
+    "audience": [
+      "はじめて学ぶ人"
+    ],
+    "prerequisites": "特になし",
+    "genreId": "literature",
+    "subGenreId": "literary-works",
+    "tags": [
+      "サンプル",
+      "文学・言語"
+    ],
+    "difficulty": "beginner",
+    "depth": "standard",
+    "editorNote": "サンプルの編集者コメントです。",
+    "featured": true,
+    "collectedAt": "2026-10-01T00:00:00.000Z",
+    "lastCheckedAt": "2026-10-01T00:00:00.000Z",
+    "source": "sample",
+    "aiStatus": "done",
+    "reviewStatus": "reviewed",
+    "status": "approved"
+  },
+  {
+    "id": "sample-17",
+    "youtubeId": "SAMPLE00017",
+    "title": "【サンプル】文学・言語の動画タイトル例 その2：表示確認用のダミーデータです",
+    "channelId": "sample",
+    "channelTitle": "サンプルチャンネル",
+    "url": "https://example.com/",
+    "thumbnailUrl": "",
+    "publishedAt": "2026-01-17T00:00:00.000Z",
+    "durationSec": 3300,
+    "embeddable": false,
+    "summary": "これはデザイン確認用のサンプル要約です。実在の動画ではありません。物語と言葉の世界。作品の読み方から言語学まで。",
+    "learningPoints": [
+      "サンプルの学習ポイント1",
+      "サンプルの学習ポイント2",
+      "サンプルの学習ポイント3"
+    ],
+    "audience": [
+      "学生"
+    ],
+    "prerequisites": "サンプルの前提知識",
+    "genreId": "literature",
+    "subGenreId": "linguistics",
+    "tags": [
+      "サンプル",
+      "文学・言語"
+    ],
+    "difficulty": "intermediate",
+    "depth": "deep",
+    "editorNote": "",
+    "featured": false,
+    "collectedAt": "2026-10-01T00:00:00.000Z",
+    "lastCheckedAt": "2026-10-01T00:00:00.000Z",
+    "source": "sample",
+    "aiStatus": "done",
+    "reviewStatus": "reviewed",
+    "status": "approved"
+  },
+  {
+    "id": "sample-18",
+    "youtubeId": "SAMPLE00018",
+    "title": "【サンプル】文学・言語の動画タイトル例 その3：表示確認用のダミーデータです",
+    "channelId": "sample",
+    "channelTitle": "サンプルチャンネル",
+    "url": "https://example.com/",
+    "thumbnailUrl": "",
+    "publishedAt": "2026-01-18T00:00:00.000Z",
+    "durationSec": 420,
+    "embeddable": false,
+    "summary": "これはデザイン確認用のサンプル要約です。実在の動画ではありません。物語と言葉の世界。作品の読み方から言語学まで。",
+    "learningPoints": [
+      "サンプルの学習ポイント1",
+      "サンプルの学習ポイント2",
+      "サンプルの学習ポイント3"
+    ],
+    "audience": [
+      "社会人"
+    ],
+    "prerequisites": "サンプルの前提知識",
+    "genreId": "literature",
+    "subGenreId": "literary-works",
+    "tags": [
+      "サンプル",
+      "文学・言語"
+    ],
+    "difficulty": "advanced",
+    "depth": "overview",
+    "editorNote": "",
+    "featured": false,
+    "collectedAt": "2026-10-01T00:00:00.000Z",
+    "lastCheckedAt": "2026-10-01T00:00:00.000Z",
+    "source": "sample",
+    "aiStatus": "done",
+    "reviewStatus": "reviewed",
+    "status": "approved"
+  },
+  {
+    "id": "sample-19",
+    "youtubeId": "SAMPLE00019",
+    "title": "【サンプル】テクノロジーの動画タイトル例 その1：表示確認用のダミーデータです",
+    "channelId": "sample",
+    "channelTitle": "サンプルチャンネル",
+    "url": "https://example.com/",
+    "thumbnailUrl": "",
+    "publishedAt": "2026-01-19T00:00:00.000Z",
+    "durationSec": 960,
+    "embeddable": false,
+    "summary": "これはデザイン確認用のサンプル要約です。実在の動画ではありません。情報技術やAIなど、社会を変える技術の基礎と影響。",
+    "learningPoints": [
+      "サンプルの学習ポイント1",
+      "サンプルの学習ポイント2",
+      "サンプルの学習ポイント3"
+    ],
+    "audience": [
+      "専門的に学びたい人"
+    ],
+    "prerequisites": "特になし",
+    "genreId": "technology",
+    "subGenreId": "computing",
+    "tags": [
+      "サンプル",
+      "テクノロジー"
+    ],
+    "difficulty": "beginner",
+    "depth": "standard",
+    "editorNote": "サンプルの編集者コメントです。",
+    "featured": true,
+    "collectedAt": "2026-10-01T00:00:00.000Z",
+    "lastCheckedAt": "2026-10-01T00:00:00.000Z",
+    "source": "sample",
+    "aiStatus": "done",
+    "reviewStatus": "reviewed",
+    "status": "approved"
+  },
+  {
+    "id": "sample-20",
+    "youtubeId": "SAMPLE00020",
+    "title": "【サンプル】テクノロジーの動画タイトル例 その2：表示確認用のダミーデータです",
+    "channelId": "sample",
+    "channelTitle": "サンプルチャンネル",
+    "url": "https://example.com/",
+    "thumbnailUrl": "",
+    "publishedAt": "2026-01-20T00:00:00.000Z",
+    "durationSec": 1800,
+    "embeddable": false,
+    "summary": "これはデザイン確認用のサンプル要約です。実在の動画ではありません。情報技術やAIなど、社会を変える技術の基礎と影響。",
+    "learningPoints": [
+      "サンプルの学習ポイント1",
+      "サンプルの学習ポイント2",
+      "サンプルの学習ポイント3"
+    ],
+    "audience": [
+      "はじめて学ぶ人"
+    ],
+    "prerequisites": "サンプルの前提知識",
+    "genreId": "technology",
+    "subGenreId": "ai",
+    "tags": [
+      "サンプル",
+      "テクノロジー"
+    ],
+    "difficulty": "intermediate",
+    "depth": "deep",
+    "editorNote": "",
+    "featured": false,
+    "collectedAt": "2026-10-01T00:00:00.000Z",
+    "lastCheckedAt": "2026-10-01T00:00:00.000Z",
+    "source": "sample",
+    "aiStatus": "done",
+    "reviewStatus": "reviewed",
+    "status": "approved"
+  },
+  {
+    "id": "sample-21",
+    "youtubeId": "SAMPLE00021",
+    "title": "【サンプル】テクノロジーの動画タイトル例 その3：表示確認用のダミーデータです",
+    "channelId": "sample",
+    "channelTitle": "サンプルチャンネル",
+    "url": "https://example.com/",
+    "thumbnailUrl": "",
+    "publishedAt": "2026-01-21T00:00:00.000Z",
+    "durationSec": 2700,
+    "embeddable": false,
+    "summary": "これはデザイン確認用のサンプル要約です。実在の動画ではありません。情報技術やAIなど、社会を変える技術の基礎と影響。",
+    "learningPoints": [
+      "サンプルの学習ポイント1",
+      "サンプルの学習ポイント2",
+      "サンプルの学習ポイント3"
+    ],
+    "audience": [
+      "学生"
+    ],
+    "prerequisites": "サンプルの前提知識",
+    "genreId": "technology",
+    "subGenreId": "computing",
+    "tags": [
+      "サンプル",
+      "テクノロジー"
+    ],
+    "difficulty": "advanced",
+    "depth": "overview",
+    "editorNote": "",
+    "featured": false,
+    "collectedAt": "2026-10-01T00:00:00.000Z",
+    "lastCheckedAt": "2026-10-01T00:00:00.000Z",
+    "source": "sample",
+    "aiStatus": "done",
+    "reviewStatus": "reviewed",
+    "status": "approved"
+  },
+  {
+    "id": "sample-22",
+    "youtubeId": "SAMPLE00022",
+    "title": "【サンプル】心理・人間の動画タイトル例 その1：表示確認用のダミーデータです",
+    "channelId": "sample",
+    "channelTitle": "サンプルチャンネル",
+    "url": "https://example.com/",
+    "thumbnailUrl": "",
+    "publishedAt": "2026-01-22T00:00:00.000Z",
+    "durationSec": 600,
+    "embeddable": false,
+    "summary": "これはデザイン確認用のサンプル要約です。実在の動画ではありません。心と行動の科学。人間を理解するための視点。",
+    "learningPoints": [
+      "サンプルの学習ポイント1",
+      "サンプルの学習ポイント2",
+      "サンプルの学習ポイント3"
+    ],
+    "audience": [
+      "社会人"
+    ],
+    "prerequisites": "特になし",
+    "genreId": "psychology",
+    "subGenreId": "cognitive",
+    "tags": [
+      "サンプル",
+      "心理・人間"
+    ],
+    "difficulty": "beginner",
+    "depth": "standard",
+    "editorNote": "サンプルの編集者コメントです。",
+    "featured": true,
+    "collectedAt": "2026-10-01T00:00:00.000Z",
+    "lastCheckedAt": "2026-10-01T00:00:00.000Z",
+    "source": "sample",
+    "aiStatus": "done",
+    "reviewStatus": "reviewed",
+    "status": "approved"
+  },
+  {
+    "id": "sample-23",
+    "youtubeId": "SAMPLE00023",
+    "title": "【サンプル】心理・人間の動画タイトル例 その2：表示確認用のダミーデータです",
+    "channelId": "sample",
+    "channelTitle": "サンプルチャンネル",
+    "url": "https://example.com/",
+    "thumbnailUrl": "",
+    "publishedAt": "2026-01-23T00:00:00.000Z",
+    "durationSec": 3300,
+    "embeddable": false,
+    "summary": "これはデザイン確認用のサンプル要約です。実在の動画ではありません。心と行動の科学。人間を理解するための視点。",
+    "learningPoints": [
+      "サンプルの学習ポイント1",
+      "サンプルの学習ポイント2",
+      "サンプルの学習ポイント3"
+    ],
+    "audience": [
+      "専門的に学びたい人"
+    ],
+    "prerequisites": "サンプルの前提知識",
+    "genreId": "psychology",
+    "subGenreId": "behavioral",
+    "tags": [
+      "サンプル",
+      "心理・人間"
+    ],
+    "difficulty": "intermediate",
+    "depth": "deep",
+    "editorNote": "",
+    "featured": false,
+    "collectedAt": "2026-10-01T00:00:00.000Z",
+    "lastCheckedAt": "2026-10-01T00:00:00.000Z",
+    "source": "sample",
+    "aiStatus": "done",
+    "reviewStatus": "reviewed",
+    "status": "approved"
+  },
+  {
+    "id": "sample-24",
+    "youtubeId": "SAMPLE00024",
+    "title": "【サンプル】心理・人間の動画タイトル例 その3：表示確認用のダミーデータです",
+    "channelId": "sample",
+    "channelTitle": "サンプルチャンネル",
+    "url": "https://example.com/",
+    "thumbnailUrl": "",
+    "publishedAt": "2026-01-24T00:00:00.000Z",
+    "durationSec": 420,
+    "embeddable": false,
+    "summary": "これはデザイン確認用のサンプル要約です。実在の動画ではありません。心と行動の科学。人間を理解するための視点。",
+    "learningPoints": [
+      "サンプルの学習ポイント1",
+      "サンプルの学習ポイント2",
+      "サンプルの学習ポイント3"
+    ],
+    "audience": [
+      "はじめて学ぶ人"
+    ],
+    "prerequisites": "サンプルの前提知識",
+    "genreId": "psychology",
+    "subGenreId": "cognitive",
+    "tags": [
+      "サンプル",
+      "心理・人間"
+    ],
+    "difficulty": "advanced",
+    "depth": "overview",
+    "editorNote": "",
+    "featured": false,
+    "collectedAt": "2026-10-01T00:00:00.000Z",
+    "lastCheckedAt": "2026-10-01T00:00:00.000Z",
+    "source": "sample",
+    "aiStatus": "done",
+    "reviewStatus": "reviewed",
+    "status": "approved"
+  }
+]

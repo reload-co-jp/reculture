@@ -33,8 +33,13 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
+      - name: Test
+        run: pnpm test
+
       - name: Build application
         run: pnpm build
+        env:
+          NEXT_PUBLIC_SITE_URL: ${{ vars.SITE_URL }}
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3

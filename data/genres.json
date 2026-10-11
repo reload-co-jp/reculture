@@ -1,0 +1,76 @@
+[
+  {
+    "id": "philosophy",
+    "name": "哲学・思想",
+    "description": "問いを立て、考える技術。古代から現代までの思想とその背景をたどる。",
+    "subGenres": [
+      { "id": "ethics", "name": "倫理学" },
+      { "id": "history-of-philosophy", "name": "哲学史" }
+    ]
+  },
+  {
+    "id": "history",
+    "name": "歴史",
+    "description": "過去の出来事から、いまの社会のなりたちを読み解く。",
+    "subGenres": [
+      { "id": "japanese-history", "name": "日本史" },
+      { "id": "world-history", "name": "世界史" }
+    ]
+  },
+  {
+    "id": "science",
+    "name": "自然科学",
+    "description": "物理・生物・宇宙など、世界のしくみを科学の目で見る。",
+    "subGenres": [
+      { "id": "physics", "name": "物理学" },
+      { "id": "biology", "name": "生物学" },
+      { "id": "astronomy", "name": "天文学" }
+    ]
+  },
+  {
+    "id": "economics",
+    "name": "経済・社会",
+    "description": "お金、市場、制度。社会を動かす仕組みを理解する。",
+    "subGenres": [
+      { "id": "economics-basics", "name": "経済学" },
+      { "id": "sociology", "name": "社会学" }
+    ]
+  },
+  {
+    "id": "arts",
+    "name": "芸術・文化",
+    "description": "美術、音楽、建築、映画。表現の歴史と見方を知る。",
+    "subGenres": [
+      { "id": "art-history", "name": "美術史" },
+      { "id": "music", "name": "音楽" },
+      { "id": "architecture", "name": "建築" }
+    ]
+  },
+  {
+    "id": "literature",
+    "name": "文学・言語",
+    "description": "物語と言葉の世界。作品の読み方から言語学まで。",
+    "subGenres": [
+      { "id": "literary-works", "name": "文学作品" },
+      { "id": "linguistics", "name": "言語学" }
+    ]
+  },
+  {
+    "id": "technology",
+    "name": "テクノロジー",
+    "description": "情報技術やAIなど、社会を変える技術の基礎と影響。",
+    "subGenres": [
+      { "id": "computing", "name": "コンピュータ" },
+      { "id": "ai", "name": "人工知能" }
+    ]
+  },
+  {
+    "id": "psychology",
+    "name": "心理・人間",
+    "description": "心と行動の科学。人間を理解するための視点。",
+    "subGenres": [
+      { "id": "cognitive", "name": "認知心理学" },
+      { "id": "behavioral", "name": "行動科学" }
+    ]
+  }
+]
