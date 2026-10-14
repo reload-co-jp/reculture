@@ -110,6 +110,7 @@ function enrichmentSchema(genres: Genre[]) {
     type: "object",
     additionalProperties: false,
     required: [
+      "relevant",
       "summary",
       "learningPoints",
       "audience",
@@ -121,6 +122,7 @@ function enrichmentSchema(genres: Genre[]) {
       "depth",
     ],
     properties: {
+      relevant: { type: "boolean" },
       summary: { type: "string" },
       learningPoints: { type: "array", items: { type: "string" } },
       audience: { type: "array", items: { type: "string", enum: AUDIENCES } },
@@ -140,6 +142,7 @@ const SYSTEM = `あなたは教養動画キュレーションサイトの編集�
 YouTube動画のメタデータ（タイトル・チャンネル・説明文・長さ）だけを根拠に、掲載用の下書きを日本語で作成します。
 
 - 与えられた情報から確認できないことは推測で補わないでください。判断できない項目は null、空文字、または空配列にしてください。
+- relevant: ジャンル一覧のいずれかに該当する、知識や考え方を学べる教養・解説動画なら true。娯楽・雑談・ニュース速報・商品紹介・受験テクニックのみ等は false。
 - summary: 2〜3文、120字程度。動画で扱う内容を事実ベースで。誇張や宣伝的表現は避ける。
 - learningPoints: 学べることを3〜5個、各40字以内。説明文から読み取れない場合は少なくてよい。
 - audience: 想定される対象者を選択肢から1〜2個。
@@ -182,10 +185,12 @@ async function enrich(
     throw new Error(`stop_reason=${response.stop_reason}`)
   const text = response.content.find((b) => b.type === "text")
   if (!text || text.type !== "text") throw new Error("no text output")
-  const out = JSON.parse(text.text)
+  const { relevant, ...out } = JSON.parse(text.text)
   const genre = genres.find((g) => g.id === out.genreId)
   return {
     ...out,
+    // Off-topic videos stay recorded (for dedupe) but are never reviewed.
+    ...(relevant ? {} : { status: "rejected" }),
     // Drop a sub-genre that does not belong to the chosen genre.
     subGenreId: genre?.subGenres.some((s) => s.id === out.subGenreId)
       ? out.subGenreId
@@ -287,6 +292,9 @@ async function main() {
     await log("info", "enrich", "ANTHROPIC_API_KEY not set; skipped")
   } else {
     const client = new Anthropic()
+    const targetGenres = genres.filter((g) =>
+      sources.targetGenreIds.includes(g.id)
+    )
     const todo = videos
       .filter((v) => v.status === "pending" && v.aiStatus !== "done")
       .slice(0, sources.maxPerRun)
@@ -305,7 +313,7 @@ async function main() {
         const fields = await enrich(
           client,
           v,
-          genres,
+          targetGenres,
           descriptions.get(v.youtubeId) ?? ""
         )
         videos[i] = { ...v, ...fields, aiStatus: "done" }
