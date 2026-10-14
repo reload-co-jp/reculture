@@ -1,7 +1,7 @@
 // Daily pipeline: check existing videos, collect new candidates from YouTube,
 // enrich them with the LLM, validate, and save as unapproved (`pending`).
 //
-// Env: YOUTUBE_API_KEY (required), ANTHROPIC_API_KEY (optional; enrichment is
+// Env: YOUTUBE_API_KEY (required), CLAUDE_CODE_OAUTH_TOKEN (optional; enrichment is
 // skipped without it), LLM_MODEL (optional).
 // Usage: node scripts/collect.ts [--dry-run]
 import { appendFile, mkdir, readFile, writeFile } from "node:fs/promises"
@@ -288,10 +288,14 @@ async function main() {
 
   // 4. LLM enrichment for pending videos (new ones, plus earlier failures).
   let enriched = 0
-  if (!process.env.ANTHROPIC_API_KEY) {
-    await log("info", "enrich", "ANTHROPIC_API_KEY not set; skipped")
+  if (!process.env.CLAUDE_CODE_OAUTH_TOKEN) {
+    await log("info", "enrich", "CLAUDE_CODE_OAUTH_TOKEN not set; skipped")
   } else {
-    const client = new Anthropic()
+    const client = new Anthropic({
+      apiKey: null,
+      authToken: process.env.CLAUDE_CODE_OAUTH_TOKEN,
+      defaultHeaders: { "anthropic-beta": "oauth-2025-04-20" },
+    })
     const targetGenres = genres.filter((g) =>
       sources.targetGenreIds.includes(g.id)
     )

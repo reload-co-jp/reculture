@@ -47,10 +47,10 @@ pnpm build                     # データ検証 → out/ に静的出力
 | 名前                | 種別             | 用途                                                            |
 | ------------------- | ---------------- | --------------------------------------------------------------- |
 | `YOUTUBE_API_KEY`   | Secret           | YouTube Data API v3（収集に必須）                               |
-| `ANTHROPIC_API_KEY` | Secret           | AI 要約・分類（未設定なら AI 処理をスキップ）                   |
+| `CLAUDE_CODE_OAUTH_TOKEN` | Secret     | AI 要約・分類（`claude setup-token` で発行。未設定なら AI 処理をスキップ） |
 | `LLM_MODEL`         | Variable（任意） | 使用モデル。既定 `claude-opus-5-5`                              |
 
-ローカルでは `YOUTUBE_API_KEY=... ANTHROPIC_API_KEY=... pnpm collect -- --dry-run` で書き込みなしの試行ができる。
+ローカルでは `YOUTUBE_API_KEY=... CLAUDE_CODE_OAUTH_TOKEN=... pnpm collect -- --dry-run` で書き込みなしの試行ができる。
 
 ## 自動収集（.github/workflows/collect.yml）
 
