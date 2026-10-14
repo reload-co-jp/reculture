@@ -27,6 +27,8 @@ jobs:
 
       - run: pnpm install --frozen-lockfile
 
+      - run: npm install -g @anthropic-ai/claude-code
+
       - name: Collect, check and enrich videos
         run: pnpm collect
         env:

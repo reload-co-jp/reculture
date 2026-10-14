@@ -1,11 +1,13 @@
 // Daily pipeline: check existing videos, collect new candidates from YouTube,
 // enrich them with the LLM, validate, and save as unapproved (`pending`).
 //
-// Env: YOUTUBE_API_KEY (required), CLAUDE_CODE_OAUTH_TOKEN (optional; enrichment is
-// skipped without it), LLM_MODEL (optional).
+// Env: YOUTUBE_API_KEY (required), LLM_MODEL (optional).
+// Enrichment runs the `claude` CLI (Claude Code), so it uses its login
+// (or CLAUDE_CODE_OAUTH_TOKEN in CI). Skipped when the CLI is missing.
 // Usage: node scripts/collect.ts [--dry-run]
 import { appendFile, mkdir, readFile, writeFile } from "node:fs/promises"
-import Anthropic from "@anthropic-ai/sdk"
+import { execFile } from "node:child_process"
+import { promisify } from "node:util"
 import {
   AUDIENCES,
   DEPTHS,
@@ -152,40 +154,57 @@ YouTube動画のメタデータ（タイトル・チャンネル・説明文・�
 - difficulty: beginner=前提知識なしで理解できる / intermediate=基礎知識が必要 / advanced=専門的。
 - depth: overview=概要紹介 / standard=標準的な解説 / deep=専門的な掘り下げ。`
 
-async function enrich(
-  client: Anthropic,
-  video: Video,
-  genres: Genre[],
-  description: string
-) {
+/** Thrown when further enrichment in this run is pointless. */
+class StopEnrich extends Error {}
+
+async function enrich(video: Video, genres: Genre[], description: string) {
   const genreList = genres
     .map(
       (g) =>
         `- ${g.id}（${g.name}）: ${g.subGenres.map((s) => `${s.id}（${s.name}）`).join(", ")}`
     )
     .join("\n")
-  const response = await client.beta.messages.create({
-    model: process.env.LLM_MODEL || "claude-opus-5-5",
-    max_tokens: 4000,
-    betas: ["server-side-fallback-2026-07-01"],
-    fallbacks: "default",
-    system: SYSTEM,
-    output_config: {
-      effort: "low",
-      format: { type: "json_schema", schema: enrichmentSchema(genres) },
-    },
-    messages: [
-      {
-        role: "user",
-        content: `ジャンル一覧:\n${genreList}\n\n<video>\nタイトル: ${video.title}\nチャンネル: ${video.channelTitle}\n長さ: ${Math.round(video.durationSec / 60)}分\n説明文:\n${description}\n</video>`,
-      },
-    ],
-  })
-  if (response.stop_reason !== "end_turn")
-    throw new Error(`stop_reason=${response.stop_reason}`)
-  const text = response.content.find((b) => b.type === "text")
-  if (!text || text.type !== "text") throw new Error("no text output")
-  const { relevant, ...out } = JSON.parse(text.text)
+  const prompt = `ジャンル一覧:\n${genreList}\n\n<video>\nタイトル: ${video.title}\nチャンネル: ${video.channelTitle}\n長さ: ${Math.round(video.durationSec / 60)}分\n説明文:\n${description}\n</video>`
+  const args = [
+    "-p",
+    prompt,
+    "--model",
+    process.env.LLM_MODEL || "sonnet",
+    "--effort",
+    "low",
+    "--system-prompt",
+    SYSTEM,
+    "--tools",
+    "",
+    "--setting-sources",
+    "",
+    "--strict-mcp-config",
+    "--no-session-persistence",
+    "--output-format",
+    "json",
+    "--json-schema",
+    JSON.stringify(enrichmentSchema(genres)),
+  ]
+  let stdout: string
+  try {
+    ;({ stdout } = await promisify(execFile)("claude", args, {
+      timeout: 300_000,
+      maxBuffer: 10_000_000,
+    }))
+  } catch (e) {
+    const err = e as NodeJS.ErrnoException & { stdout?: string }
+    if (err.code === "ENOENT") throw new StopEnrich("claude CLI not found")
+    if (!err.stdout) throw e
+    stdout = err.stdout // CLI exits non-zero on API errors; details are in JSON
+  }
+  const result = JSON.parse(stdout)
+  if (result.is_error) {
+    const msg = `${result.subtype} ${result.api_error_status ?? ""} ${result.result ?? ""}`
+    if (result.api_error_status === 429) throw new StopEnrich(msg)
+    throw new Error(msg)
+  }
+  if (!result.structured_output) throw new Error("no structured output")
+  const { relevant, ...out } = result.structured_output
   const genre = genres.find((g) => g.id === out.genreId)
   return {
     ...out,
@@ -288,14 +307,7 @@ async function main() {
 
   // 4. LLM enrichment for pending videos (new ones, plus earlier failures).
   let enriched = 0
-  if (!process.env.CLAUDE_CODE_OAUTH_TOKEN) {
-    await log("info", "enrich", "CLAUDE_CODE_OAUTH_TOKEN not set; skipped")
-  } else {
-    const client = new Anthropic({
-      apiKey: null,
-      authToken: process.env.CLAUDE_CODE_OAUTH_TOKEN,
-      defaultHeaders: { "anthropic-beta": "oauth-2025-04-20" },
-    })
+  {
     const targetGenres = genres.filter((g) =>
       sources.targetGenreIds.includes(g.id)
     )
@@ -315,7 +327,6 @@ async function main() {
       const i = videos.indexOf(v)
       try {
         const fields = await enrich(
-          client,
           v,
           targetGenres,
           descriptions.get(v.youtubeId) ?? ""
@@ -325,6 +336,8 @@ async function main() {
       } catch (e) {
         videos[i] = { ...v, aiStatus: "failed" }
         await log("error", "enrich", `${v.id}: ${(e as Error).message}`)
+        // Rate limited or no CLI: the rest would fail too. Retried next run.
+        if (e instanceof StopEnrich) break
       }
     }
   }
