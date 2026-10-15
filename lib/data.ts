@@ -19,8 +19,11 @@ export const genreName: Record<string, string> = Object.fromEntries(
 
 const allVideos = (useSample ? sampleVideosJson : videosJson) as Video[]
 
-/** Only approved videos are ever published. */
-export const videos = allVideos.filter((v) => v.status === "approved")
+// `next dev` also shows pending videos for review; builds publish approved only.
+const visible = new Set(
+  process.env.NODE_ENV === "development" ? ["approved", "pending"] : ["approved"]
+)
+export const videos = allVideos.filter((v) => visible.has(v.status))
 
 const videoById = new Map(videos.map((v) => [v.id, v]))
 export const getVideo = (id: string) => videoById.get(id)

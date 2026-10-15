@@ -29,6 +29,9 @@ export const VideoCard: FC<{ video: Video; genreName?: string }> = ({
       <p className="card-channel">{video.channelTitle}</p>
       {video.summary && <p className="card-summary">{video.summary}</p>}
       <div className="tags">
+        {video.status === "pending" && (
+          <span className="tag tag-pending">承認待ち</span>
+        )}
         {video.difficulty && (
           <span className="tag tag-level">
             難易度：{DIFFICULTY_LABEL[video.difficulty]}

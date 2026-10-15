@@ -1,5 +1,6 @@
 import Link from "next/link"
 import { notFound } from "next/navigation"
+import { ReviewButtons } from "@/components/elements/review-buttons"
 import { Breadcrumb, JsonLd, SectionHead } from "@/components/elements/layout"
 import { VideoRow } from "@/components/elements/video-card"
 import {
@@ -79,6 +80,12 @@ const Page = async ({ params }: Props) => {
         <div className="meta">
           <span>{video.channelTitle}</span>
           <span>{formatDuration(video.durationSec)}</span>
+          {video.status === "pending" && (
+            <>
+              <span className="tag tag-pending">承認待ち</span>
+              <ReviewButtons id={video.id} />
+            </>
+          )}
           {video.difficulty && (
             <span className="tag tag-level">
               難易度：{DIFFICULTY_LABEL[video.difficulty]}

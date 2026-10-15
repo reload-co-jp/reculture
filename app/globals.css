@@ -434,6 +434,10 @@ select {
 .tag-level {
   border-color: var(--text);
 }
+.tag-pending {
+  border-color: var(--accent);
+  color: var(--accent);
+}
 
 /* ---------- Video list / filters ---------- */
 .list-layout {
