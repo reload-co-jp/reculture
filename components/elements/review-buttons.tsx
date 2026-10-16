@@ -2,8 +2,14 @@
 import { useRouter } from "next/navigation"
 import { FC, useState } from "react"
 
-/** Dev-only (pending videos never reach builds). Calls app/api/review. */
-export const ReviewButtons: FC<{ id: string }> = ({ id }) => {
+/**
+ * Dev-only (pending videos never reach builds). Calls app/api/review.
+ * `stay`: refresh in place after rejecting (e.g. the /review/ list).
+ */
+export const ReviewButtons: FC<{ id: string; stay?: boolean }> = ({
+  id,
+  stay,
+}) => {
   const router = useRouter()
   const [error, setError] = useState("")
   const review = async (status: "approved" | "rejected") => {
@@ -13,7 +19,9 @@ export const ReviewButtons: FC<{ id: string }> = ({ id }) => {
     })
     // A rejected video disappears from the site, so leave its page.
     if (res.ok)
-      return status === "rejected" ? router.push("/videos/") : router.refresh()
+      return status === "rejected" && !stay
+        ? router.push("/videos/")
+        : router.refresh()
     const body = await res.json().catch(() => ({}))
     setError(body.errors?.join("\n") ?? body.error ?? `HTTP ${res.status}`)
   }
