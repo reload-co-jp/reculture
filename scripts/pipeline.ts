@@ -99,3 +99,18 @@ export function applyCheck(
     status: gone && video.status !== "rejected" ? "archived" : video.status,
   }
 }
+
+/** YouTube timedtext XML -> plain text (cue texts joined, entities decoded). */
+export function parseTranscript(xml: string): string {
+  const decode = (s: string) =>
+    s
+      .replace(/&amp;/g, "&")
+      .replace(/&#(\d+);/g, (_, n) => String.fromCodePoint(Number(n)))
+      .replace(/&quot;/g, '"')
+      .replace(/&lt;/g, "<")
+      .replace(/&gt;/g, ">")
+  return [...xml.matchAll(/<text[^>]*>([\s\S]*?)<\/text>/g)]
+    .map((m) => decode(m[1]).replace(/\s+/g, " ").trim())
+    .filter(Boolean)
+    .join(" ")
+}

@@ -4,9 +4,10 @@
 // Env: YOUTUBE_API_KEY (required), LLM_MODEL (optional).
 // Enrichment runs the `claude` CLI (Claude Code), so it uses its login
 // (or CLAUDE_CODE_OAUTH_TOKEN in CI). Skipped when the CLI is missing.
-// Usage: node scripts/collect.ts [--dry-run]
+// Usage: node scripts/collect.ts [--dry-run] [--regenerate]
 import { appendFile, mkdir, readFile, writeFile } from "node:fs/promises"
 import { execFile } from "node:child_process"
+import { setTimeout as sleep } from "node:timers/promises"
 import { promisify } from "node:util"
 import {
   AUDIENCES,
@@ -20,12 +21,15 @@ import {
 import {
   applyCheck,
   excludeReason,
+  parseTranscript,
   toVideo,
   type YouTubeItem,
 } from "./pipeline.ts"
 
 const DATA = new URL("../data/", import.meta.url)
 const dryRun = process.argv.includes("--dry-run")
+// Skip searching and process every pending video still to do, uncapped.
+const regenerate = process.argv.includes("--regenerate")
 const now = new Date().toISOString()
 const logFile = new URL(`logs/${now.slice(0, 7)}.jsonl`, DATA)
 
@@ -102,6 +106,35 @@ async function search(sources: Sources, query: Record<string, string>) {
   return res.items.map((i) => i.id.videoId)
 }
 
+/** Spoken text from captions (manual preferred over auto). "" when none. */
+async function fetchTranscript(youtubeId: string, language: string) {
+  // ponytail: unofficial innertube endpoint (Data API captions need owner OAuth); may break or be blocked from CI IPs.
+  const res = await fetch(
+    "https://www.youtube.com/youtubei/v1/player?prettyPrint=false",
+    {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        context: {
+          client: { clientName: "ANDROID", clientVersion: "20.10.38" },
+        },
+        videoId: youtubeId,
+      }),
+    }
+  )
+  if (!res.ok) throw new Error(`player ${res.status}`)
+  const tracks: { baseUrl: string; languageCode: string; kind?: string }[] =
+    (await res.json()).captions?.playerCaptionsTracklistRenderer
+      ?.captionTracks ?? []
+  const track =
+    tracks.find((t) => t.languageCode === language && t.kind !== "asr") ??
+    tracks.find((t) => t.languageCode === language)
+  if (!track) return ""
+  const xml = await fetch(track.baseUrl.replace(/&fmt=\w+/, ""))
+  if (!xml.ok) throw new Error(`timedtext ${xml.status}`)
+  return parseTranscript(await xml.text())
+}
+
 // ---------- LLM ----------
 
 function enrichmentSchema(genres: Genre[]) {
@@ -115,6 +148,7 @@ function enrichmentSchema(genres: Genre[]) {
       "relevant",
       "summary",
       "learningPoints",
+      "transcriptSummary",
       "audience",
       "prerequisites",
       "genreId",
@@ -127,6 +161,7 @@ function enrichmentSchema(genres: Genre[]) {
       relevant: { type: "boolean" },
       summary: { type: "string" },
       learningPoints: { type: "array", items: { type: "string" } },
+      transcriptSummary: { type: "string" },
       audience: { type: "array", items: { type: "string", enum: AUDIENCES } },
       prerequisites: { type: "string" },
       genreId: nullableEnum(genres.map((g) => g.id)),
@@ -141,12 +176,13 @@ function enrichmentSchema(genres: Genre[]) {
 }
 
 const SYSTEM = `あなたは教養動画キュレーションサイトの編集アシスタントです。
-YouTube動画のメタデータ（タイトル・チャンネル・説明文・長さ）だけを根拠に、掲載用の下書きを日本語で作成します。
+YouTube動画のメタデータ（タイトル・チャンネル・説明文・長さ）と読み上げテキスト（字幕。ある場合のみ）だけを根拠に、掲載用の下書きを日本語で作成します。
 
 - 与えられた情報から確認できないことは推測で補わないでください。判断できない項目は null、空文字、または空配列にしてください。
 - relevant: ジャンル一覧のいずれかに該当する、知識や考え方を学べる教養・解説動画なら true。娯楽・雑談・ニュース速報・商品紹介・受験テクニックのみ等は false。
 - summary: 2〜3文、120字程度。動画で扱う内容を事実ベースで。誇張や宣伝的表現は避ける。
-- learningPoints: 学べることを3〜5個、各40字以内。説明文から読み取れない場合は少なくてよい。
+- learningPoints: 学べることを3〜5個、各40字以内。説明文・読み上げテキストから読み取れない場合は少なくてよい。
+- transcriptSummary: 読み上げテキストの内容を話の流れに沿って詳しく要約。導入・各論点（主張、根拠、具体例やエピソード、登場する人物・用語の説明）・結論を省かずに書く。1000〜2000字（短い動画は内容に応じて短くてよい）、4〜8段落、段落ごとに改行。自動字幕の誤認識は文脈から補正し、固有名詞が不確かなら書かない。読み上げテキストがなければ空文字。
 - audience: 想定される対象者を選択肢から1〜2個。
 - prerequisites: 必要な前提知識を短く。不要なら「特になし」、判断できなければ空文字。
 - genreId / subGenreId: ジャンル一覧から最も適切なもの。subGenreId は選んだ genreId に属するものだけ。該当なしは null。
@@ -157,14 +193,19 @@ YouTube動画のメタデータ（タイトル・チャンネル・説明文・�
 /** Thrown when further enrichment in this run is pointless. */
 class StopEnrich extends Error {}
 
-async function enrich(video: Video, genres: Genre[], description: string) {
+async function enrich(
+  video: Video,
+  genres: Genre[],
+  description: string,
+  transcript: string
+) {
   const genreList = genres
     .map(
       (g) =>
         `- ${g.id}（${g.name}）: ${g.subGenres.map((s) => `${s.id}（${s.name}）`).join(", ")}`
     )
     .join("\n")
-  const prompt = `ジャンル一覧:\n${genreList}\n\n<video>\nタイトル: ${video.title}\nチャンネル: ${video.channelTitle}\n長さ: ${Math.round(video.durationSec / 60)}分\n説明文:\n${description}\n</video>`
+  const prompt = `ジャンル一覧:\n${genreList}\n\n<video>\nタイトル: ${video.title}\nチャンネル: ${video.channelTitle}\n長さ: ${Math.round(video.durationSec / 60)}分\n説明文:\n${description}\n読み上げテキスト:\n${transcript.slice(0, 40_000) || "（なし）"}\n</video>`
   const args = [
     "-p",
     prompt,
@@ -266,16 +307,18 @@ async function main() {
 
   // 2. Collect candidate IDs from keywords and channels.
   const candidates = new Map<string, string>() // youtubeId -> source
-  const queries = [
-    ...sources.keywords.map((k) => ({
-      source: `keyword:${k.q}`,
-      query: { q: k.q },
-    })),
-    ...sources.channels.map((c) => ({
-      source: `channel:${c.channelId}`,
-      query: { channelId: c.channelId, order: "date" },
-    })),
-  ]
+  const queries = regenerate
+    ? []
+    : [
+        ...sources.keywords.map((k) => ({
+          source: `keyword:${k.q}`,
+          query: { q: k.q },
+        })),
+        ...sources.channels.map((c) => ({
+          source: `channel:${c.channelId}`,
+          query: { channelId: c.channelId, order: "date" },
+        })),
+      ]
   for (const { source, query } of queries) {
     try {
       for (const id of await search(sources, query))
@@ -312,8 +355,14 @@ async function main() {
       sources.targetGenreIds.includes(g.id)
     )
     const todo = videos
-      .filter((v) => v.status === "pending" && v.aiStatus !== "done")
-      .slice(0, sources.maxPerRun)
+      .filter(
+        (v) =>
+          v.status === "pending" &&
+          (v.aiStatus !== "done" || v.transcriptSummary === undefined)
+      )
+      // New/failed first; then backfill transcript summaries for older ones.
+      .sort((a, b) => +(a.aiStatus === "done") - +(b.aiStatus === "done"))
+      .slice(0, regenerate ? Infinity : sources.maxPerRun)
     const missing = todo
       .filter((v) => !descriptions.has(v.youtubeId))
       .map((v) => v.youtubeId)
@@ -323,15 +372,37 @@ async function main() {
     } catch (e) {
       await log("error", "enrich", `description fetch: ${(e as Error).message}`)
     }
+    let transcriptBlocked = false
     for (const v of todo) {
       const i = videos.indexOf(v)
+      let transcript: string | undefined
+      if (!transcriptBlocked) {
+        try {
+          transcript = await fetchTranscript(v.youtubeId, sources.language)
+          await sleep(3000) // YouTube rate-limits caption fetches by IP.
+        } catch (e) {
+          const msg = (e as Error).message
+          await log("error", "transcript", `${v.id}: ${msg}`)
+          // Blocked for hours; the rest would fail too. Retried next run.
+          if (msg.includes("429")) transcriptBlocked = true
+        }
+      }
+      // No transcript and already enriched: nothing new to add, retry later.
+      if (transcript === undefined && v.aiStatus === "done") continue
       try {
-        const fields = await enrich(
+        const { transcriptSummary, ...fields } = await enrich(
           v,
           targetGenres,
-          descriptions.get(v.youtubeId) ?? ""
+          descriptions.get(v.youtubeId) ?? "",
+          transcript ?? ""
         )
-        videos[i] = { ...v, ...fields, aiStatus: "done" }
+        videos[i] = {
+          ...v,
+          ...fields,
+          // Leave unset when the fetch failed so the next run retries it.
+          ...(transcript !== undefined && { transcriptSummary }),
+          aiStatus: "done",
+        }
         enriched++
       } catch (e) {
         videos[i] = { ...v, aiStatus: "failed" }

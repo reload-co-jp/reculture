@@ -129,6 +129,17 @@ const Page = async ({ params }: Props) => {
           <div className="prose">
             <h2>要約</h2>
             <p>{video.summary}</p>
+            {video.transcriptSummary && (
+              <>
+                <h2>動画の内容</h2>
+                {video.transcriptSummary
+                  .split("\n")
+                  .filter(Boolean)
+                  .map((p) => (
+                    <p key={p}>{p}</p>
+                  ))}
+              </>
+            )}
             {video.learningPoints.length > 0 && (
               <>
                 <h2>学べること</h2>

@@ -6,6 +6,7 @@ import {
   applyCheck,
   excludeReason,
   parseIsoDuration,
+  parseTranscript,
   toVideo,
   type YouTubeItem,
 } from "./pipeline"
@@ -105,5 +106,12 @@ describe("toVideo / applyCheck", () => {
       status: "approved",
       embeddable: false,
     })
+  })
+})
+
+describe("parseTranscript", () => {
+  it("joins cues and decodes entities", () => {
+    const xml = `<?xml version="1.0" encoding="utf-8" ?><transcript><text start="0" dur="1">It&amp;#39;s</text><text start="1" dur="1">a\n&lt;b&gt;</text><text start="2" dur="1"></text></transcript>`
+    expect(parseTranscript(xml)).toBe("It's a <b>")
   })
 })

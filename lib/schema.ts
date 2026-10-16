@@ -31,6 +31,8 @@ export type Video = {
   embeddable: boolean
   summary: string
   learningPoints: string[]
+  /** Summary of the spoken content (captions). "" = no captions; absent = not yet tried. */
+  transcriptSummary?: string
   audience: Audience[]
   prerequisites: string
   genreId: string | null
@@ -104,6 +106,7 @@ const VIDEO_RULES: Rule[] = [
   ["embeddable", bool, "boolean"],
   ["summary", str, "string"],
   ["learningPoints", strArr, "string[]"],
+  ["transcriptSummary", (v) => v === undefined || str(v), "string"],
   [
     "audience",
     (v) => Array.isArray(v) && v.every(oneOf(AUDIENCES)),
