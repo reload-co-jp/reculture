@@ -10,6 +10,7 @@ import {
   pageMeta,
   SITE_URL,
   staticParams,
+  tagHref,
   videos,
 } from "@/lib/data"
 import {
@@ -32,7 +33,15 @@ export const generateStaticParams = () =>
 export const generateMetadata = async ({ params }: Props) => {
   const video = getVideo((await params).videoId)
   if (!video) return {}
-  return pageMeta(video.title, video.summary, `/videos/${video.id}/`)
+  // "要約" targets "<title> 要約" queries instead of competing with YouTube's own page.
+  const meta = pageMeta(
+    `${video.title}【要約・内容解説】`,
+    video.summary,
+    `/videos/${video.id}/`
+  )
+  return video.thumbnailUrl
+    ? { ...meta, openGraph: { ...meta.openGraph, images: video.thumbnailUrl } }
+    : meta
 }
 
 const Page = async ({ params }: Props) => {
@@ -180,7 +189,7 @@ const Page = async ({ params }: Props) => {
                     <Link
                       key={t}
                       className="tag"
-                      href={`/videos/?q=${encodeURIComponent(t)}`}
+                      href={tagHref(t)}
                     >
                       {t}
                     </Link>

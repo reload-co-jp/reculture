@@ -29,6 +29,19 @@ const videoById = new Map(videos.map((v) => [v.id, v]))
 export const getVideo = (id: string) => videoById.get(id)
 export const getGenre = (id: string | null) => genres.find((g) => g.id === id)
 
+/** Tags with enough videos to earn their own page (thinner ones stay search links). */
+export const TAG_PAGE_MIN = 3
+export const tagVideos = new Map<string, Video[]>()
+for (const v of videos)
+  for (const t of v.tags) tagVideos.set(t, [...(tagVideos.get(t) ?? []), v])
+export const tagPages = [...tagVideos]
+  .filter(([, l]) => l.length >= TAG_PAGE_MIN)
+  .map(([t]) => t)
+export const tagHref = (t: string) =>
+  tagPages.includes(t)
+    ? `/tags/${encodeURIComponent(t)}/`
+    : `/videos/?q=${encodeURIComponent(t)}`
+
 /** Collections with steps resolved to published videos only. */
 export const collections = (
   (useSample ? sampleCollectionsJson : collectionsJson) as Collection[]
