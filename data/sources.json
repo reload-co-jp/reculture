@@ -3,6 +3,38 @@
   "regionCode": "JP",
   "keywords": [
     {
+      "q": "物理学 わかりやすく 解説",
+      "genreId": "science"
+    },
+    {
+      "q": "量子力学 解説",
+      "genreId": "science"
+    },
+    {
+      "q": "生物学 進化 解説",
+      "genreId": "science"
+    },
+    {
+      "q": "生命科学 解説",
+      "genreId": "science"
+    },
+    {
+      "q": "宇宙 天文学 解説",
+      "genreId": "science"
+    },
+    {
+      "q": "宇宙論 解説",
+      "genreId": "science"
+    },
+    {
+      "q": "化学 わかりやすく 解説",
+      "genreId": "science"
+    },
+    {
+      "q": "地球科学 解説",
+      "genreId": "science"
+    },
+    {
       "q": "哲学 入門 解説",
       "genreId": "philosophy"
     },
@@ -25,18 +57,6 @@
     {
       "q": "歴史 なぜ 解説",
       "genreId": "history"
-    },
-    {
-      "q": "物理学 わかりやすく 解説",
-      "genreId": "science"
-    },
-    {
-      "q": "生物学 進化 解説",
-      "genreId": "science"
-    },
-    {
-      "q": "宇宙 天文学 解説",
-      "genreId": "science"
     },
     {
       "q": "経済学 わかりやすく 解説",
