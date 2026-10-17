@@ -2,14 +2,86 @@
   "language": "ja",
   "regionCode": "JP",
   "keywords": [
-    { "q": "哲学 入門 解説", "genreId": "philosophy" },
-    { "q": "世界史 解説 講義", "genreId": "history" },
-    { "q": "物理学 わかりやすく 解説", "genreId": "science" },
-    { "q": "経済学 入門 講義", "genreId": "economics" },
-    { "q": "美術史 解説", "genreId": "arts" },
-    { "q": "言語学 入門", "genreId": "literature" },
-    { "q": "人工知能 仕組み 解説", "genreId": "technology" },
-    { "q": "心理学 入門 講義", "genreId": "psychology" }
+    {
+      "q": "哲学 入門 解説",
+      "genreId": "philosophy"
+    },
+    {
+      "q": "倫理学 わかりやすく 解説",
+      "genreId": "philosophy"
+    },
+    {
+      "q": "哲学者 思想 解説",
+      "genreId": "philosophy"
+    },
+    {
+      "q": "日本史 解説 わかりやすく",
+      "genreId": "history"
+    },
+    {
+      "q": "世界史 通史 解説",
+      "genreId": "history"
+    },
+    {
+      "q": "歴史 なぜ 解説",
+      "genreId": "history"
+    },
+    {
+      "q": "物理学 わかりやすく 解説",
+      "genreId": "science"
+    },
+    {
+      "q": "生物学 進化 解説",
+      "genreId": "science"
+    },
+    {
+      "q": "宇宙 天文学 解説",
+      "genreId": "science"
+    },
+    {
+      "q": "経済学 わかりやすく 解説",
+      "genreId": "economics"
+    },
+    {
+      "q": "社会学 入門 解説",
+      "genreId": "economics"
+    },
+    {
+      "q": "美術史 解説",
+      "genreId": "arts"
+    },
+    {
+      "q": "西洋音楽史 解説",
+      "genreId": "arts"
+    },
+    {
+      "q": "建築史 解説",
+      "genreId": "arts"
+    },
+    {
+      "q": "言語学 入門",
+      "genreId": "literature"
+    },
+    {
+      "q": "文学 名作 解説",
+      "genreId": "literature"
+    },
+    {
+      "q": "人工知能 仕組み 解説",
+      "genreId": "technology"
+    },
+    {
+      "q": "コンピュータ 仕組み 解説",
+      "genreId": "technology"
+    },
+    {
+      "q": "心理学 わかりやすく 解説",
+      "genreId": "psychology"
+    },
+    {
+      "q": "認知科学 解説",
+      "genreId": "psychology"
+    }
   ],
   "channels": [],
   "targetGenreIds": [
@@ -25,7 +97,21 @@
   "minDurationSec": 180,
   "maxDurationSec": 5400,
   "publishedWithinDays": 730,
-  "excludeKeywords": ["#shorts", "切り抜き", "ライブ配信", "生配信", "#PR"],
+  "excludeKeywords": [
+    "#shorts",
+    "切り抜き",
+    "ライブ配信",
+    "生配信",
+    "#PR",
+    "参考書",
+    "大学受験",
+    "公務員試験",
+    "中小企業診断士",
+    "証券アナリスト",
+    "不動産鑑定士",
+    "試験対策",
+    "オリジナル曲"
+  ],
   "excludeChannelIds": [],
   "maxPerRun": 20
 }
