@@ -106,6 +106,23 @@ async function search(sources: Sources, query: Record<string, string>) {
   return res.items.map((i) => i.id.videoId)
 }
 
+/** Recent uploads via the uploads playlist (1 unit vs 100 for search). */
+async function channelUploads(sources: Sources, channelId: string) {
+  const publishedAfter = Date.now() - sources.publishedWithinDays * 86400_000
+  const res = await youtube<{
+    items: { contentDetails: { videoId: string; videoPublishedAt?: string } }[]
+  }>("playlistItems", {
+    part: "contentDetails",
+    playlistId: `UU${channelId.slice(2)}`,
+    maxResults: "10",
+  })
+  return res.items
+    .filter(
+      (i) => +new Date(i.contentDetails.videoPublishedAt ?? 0) >= publishedAfter
+    )
+    .map((i) => i.contentDetails.videoId)
+}
+
 /** Spoken text from captions (manual preferred over auto). "" when none. */
 async function fetchTranscript(youtubeId: string, language: string) {
   // ponytail: unofficial innertube endpoint (Data API captions need owner OAuth); may break or be blocked from CI IPs.
@@ -305,32 +322,50 @@ async function main() {
     await log("error", "check", (e as Error).message)
   }
 
-  // 2. Collect candidate IDs from keywords and channels.
-  const candidates = new Map<string, string>() // youtubeId -> source
+  // 2. Collect candidate IDs from keywords and channels
+  // (sources.channels plus channels of approved videos).
+  const known = new Set(videos.map((v) => v.youtubeId))
+  const channelIds = [
+    ...new Set([
+      ...sources.channels.map((c) => c.channelId),
+      ...videos.filter((v) => v.status === "approved").map((v) => v.channelId),
+    ]),
+  ].filter((id) => !sources.excludeChannelIds.includes(id))
   const queries = regenerate
     ? []
     : [
         ...sources.keywords.map((k) => ({
           source: `keyword:${k.q}`,
-          query: { q: k.q },
+          ids: () => search(sources, { q: k.q }),
         })),
-        ...sources.channels.map((c) => ({
-          source: `channel:${c.channelId}`,
-          query: { channelId: c.channelId, order: "date" },
+        ...channelIds.map((id) => ({
+          source: `channel:${id}`,
+          ids: () => channelUploads(sources, id),
         })),
       ]
-  for (const { source, query } of queries) {
+  const hits = { keyword: [] as string[][], channel: [] as string[][] }
+  for (const { source, ids } of queries) {
     try {
-      for (const id of await search(sources, query))
-        if (!candidates.has(id)) candidates.set(id, source)
+      for (const id of await ids())
+        if (!known.has(id))
+          hits[source.startsWith("keyword:") ? "keyword" : "channel"].push([
+            id,
+            source,
+          ])
     } catch (e) {
       await log("error", "search", `${source}: ${(e as Error).message}`)
       if (e instanceof QuotaError) break
     }
   }
+  // Alternate keyword/channel hits so neither starves the maxPerRun cap.
+  const candidates = new Map<string, string>() // youtubeId -> source
+  for (let i = 0; i < Math.max(hits.keyword.length, hits.channel.length); i++)
+    for (const [id, source] of [hits.keyword[i], hits.channel[i]].filter(
+      Boolean
+    ))
+      if (!candidates.has(id)) candidates.set(id, source)
 
   // 3. Fetch details, dedupe and filter, cap per run.
-  const known = new Set(videos.map((v) => v.youtubeId))
   const descriptions = new Map<string, string>()
   let added = 0
   try {
