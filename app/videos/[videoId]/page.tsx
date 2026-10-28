@@ -40,7 +40,15 @@ export const generateMetadata = async ({ params }: Props) => {
     `/videos/${video.id}/`
   )
   return video.thumbnailUrl
-    ? { ...meta, openGraph: { ...meta.openGraph, images: video.thumbnailUrl } }
+    ? {
+        ...meta,
+        openGraph: { ...meta.openGraph, images: video.thumbnailUrl },
+        twitter: {
+          ...meta.twitter,
+          card: "summary_large_image",
+          images: video.thumbnailUrl,
+        },
+      }
     : meta
 }
 
@@ -75,6 +83,8 @@ const Page = async ({ params }: Props) => {
           contentUrl: video.url,
           ...(video.embeddable && { embedUrl }),
           author: { "@type": "Organization", name: video.channelTitle },
+          inLanguage: "ja",
+          ...(video.tags.length && { keywords: video.tags.join(",") }),
         }}
       />
 
@@ -186,11 +196,7 @@ const Page = async ({ params }: Props) => {
             <dd className="tags">
               {video.tags.length
                 ? video.tags.map((t) => (
-                    <Link
-                      key={t}
-                      className="tag"
-                      href={tagHref(t)}
-                    >
+                    <Link key={t} className="tag" href={tagHref(t)}>
                       {t}
                     </Link>
                   ))

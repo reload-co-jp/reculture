@@ -1,10 +1,11 @@
 import { notFound } from "next/navigation"
-import { Breadcrumb, PageHead } from "@/components/elements/layout"
+import { Breadcrumb, JsonLd, PageHead } from "@/components/elements/layout"
 import { VideoCard } from "@/components/elements/video-card"
 import {
   collections,
   genreName,
   getCollection,
+  itemListLd,
   pageMeta,
   SITE_URL,
   staticParams,
@@ -44,6 +45,7 @@ const Page = async ({ params }: Props) => {
         title={c.title}
         description={c.description}
       />
+      <JsonLd data={itemListLd(c.steps.map((s) => s.video))} />
       <ol className="steps">
         {c.steps.map((s) => (
           <li className="step" key={s.videoId}>

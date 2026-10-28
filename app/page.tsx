@@ -1,8 +1,15 @@
 import Link from "next/link"
 import { FC } from "react"
-import { SectionHead } from "@/components/elements/layout"
+import { JsonLd, SectionHead } from "@/components/elements/layout"
 import { VideoRow } from "@/components/elements/video-card"
-import { collections, genreName, genres, videos } from "@/lib/data"
+import {
+  collections,
+  genreName,
+  genres,
+  SITE_NAME,
+  SITE_URL,
+  videos,
+} from "@/lib/data"
 import { filterVideos } from "@/lib/video"
 
 const Page: FC = () => {
@@ -15,6 +22,16 @@ const Page: FC = () => {
 
   return (
     <>
+      {/* Helps Google show "Reculture" as the site name in results. */}
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          name: SITE_NAME,
+          url: `${SITE_URL}/`,
+          inLanguage: "ja",
+        }}
+      />
       <section className="hero">
         <p className="eyebrow">Reculture — a library of curiosity</p>
         <h1>

@@ -1,13 +1,22 @@
+import Link from "next/link"
 import { notFound } from "next/navigation"
-import { Breadcrumb, PageHead, SectionHead } from "@/components/elements/layout"
+import {
+  Breadcrumb,
+  JsonLd,
+  PageHead,
+  SectionHead,
+} from "@/components/elements/layout"
 import { VideoRow } from "@/components/elements/video-card"
 import {
   genreName,
   genres,
   getGenre,
+  itemListLd,
   pageMeta,
   SITE_URL,
   staticParams,
+  tagHref,
+  topTags,
   videos,
 } from "@/lib/data"
 import { filterVideos } from "@/lib/video"
@@ -35,6 +44,7 @@ const Page = async ({ params }: Props) => {
   const genre = getGenre((await params).genreId)
   if (!genre) notFound()
   const list = filterVideos(videos, { genre: genre.id })
+  const keywords = topTags(list)
 
   return (
     <>
@@ -51,6 +61,19 @@ const Page = async ({ params }: Props) => {
         title={genre.name}
         description={genre.description}
       />
+      {list.length > 0 && <JsonLd data={itemListLd(list)} />}
+      {keywords.length > 0 && (
+        <section className="section">
+          <SectionHead title={`${genre.name}のキーワード`} />
+          <div className="tags">
+            {keywords.map((t) => (
+              <Link key={t} className="tag" href={tagHref(t)}>
+                {t}
+              </Link>
+            ))}
+          </div>
+        </section>
+      )}
       {genre.subGenres.map((sub) => {
         const subList = list.filter((v) => v.subGenreId === sub.id)
         return subList.length ? (

@@ -21,7 +21,9 @@ const allVideos = (useSample ? sampleVideosJson : videosJson) as Video[]
 
 // `next dev` also shows pending videos for review; builds publish approved only.
 const visible = new Set(
-  process.env.NODE_ENV === "development" ? ["approved", "pending"] : ["approved"]
+  process.env.NODE_ENV === "development"
+    ? ["approved", "pending"]
+    : ["approved"]
 )
 export const videos = allVideos.filter((v) => visible.has(v.status))
 
@@ -37,6 +39,18 @@ for (const v of videos)
 export const tagPages = [...tagVideos]
   .filter(([, l]) => l.length >= TAG_PAGE_MIN)
   .map(([t]) => t)
+/** Tags that have their own page, most frequent in `list` first. */
+export const topTags = (list: Video[], exclude?: string, limit = 12) => {
+  const count = new Map<string, number>()
+  for (const v of list)
+    for (const t of v.tags)
+      if (t !== exclude && tagPages.includes(t))
+        count.set(t, (count.get(t) ?? 0) + 1)
+  return [...count]
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, limit)
+    .map(([t]) => t)
+}
 export const tagHref = (t: string) =>
   tagPages.includes(t)
     ? `/tags/${encodeURIComponent(t)}/`
@@ -63,7 +77,26 @@ export const pageMeta = (title: string, description: string, path: string) => ({
   title,
   description,
   alternates: { canonical: path },
-  openGraph: { title, description, url: path, siteName: SITE_NAME },
+  openGraph: {
+    title,
+    description,
+    url: path,
+    siteName: SITE_NAME,
+    locale: "ja_JP",
+  },
+  twitter: { card: "summary" as const, title, description },
+})
+
+/** ItemList structured data linking a list page to its video pages. */
+export const itemListLd = (list: Video[]) => ({
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  itemListElement: list.map((v, i) => ({
+    "@type": "ListItem",
+    position: i + 1,
+    url: `${SITE_URL}/videos/${v.id}/`,
+    name: v.title,
+  })),
 })
 
 /**

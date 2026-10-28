@@ -16,6 +16,7 @@ export const metadata: Metadata = {
   description,
   alternates: { canonical: "/" },
   openGraph: { siteName: SITE_NAME, locale: "ja_JP", type: "website" },
+  twitter: { card: "summary" },
 }
 
 const RootLayout = ({ children }: { children: React.ReactNode }) => (
